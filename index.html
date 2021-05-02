@@ -184,11 +184,15 @@
                     var name = document.getElementById("name").value;
                     var email = document.getElementById("email").value;
                     var disc = document.getElementById("disc").value;
+        if (email.includes('@'))
+                    {
                         if (name != "" && email != "" && disc != "") {
                             sendEmail(name, email, disc);
                         } else {
                             alert("All fields Are Required")
                         }
+                    }else
+                        alert("Enter Valid Email");
                 }
             </script>
         </div>
