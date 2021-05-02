@@ -173,12 +173,24 @@
         <h2 class="section-title">Contact</h2>
 
         <div class="contact__container bd-grid">
-            <form action="" class="contact__form">
-                <input type="text" placeholder="Name" class="contact__input">
-                <input type="mail" placeholder="Email" class="contact__input">
-                <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
-                <input type="button" value="Send" class="contact__button button">
+            <form id="myForm" method="post" class="contact__form">
+                <input type="text" id="name" placeholder="Name" class="contact__input" required>
+                <input type="mail" id="email" placeholder="Email" class="contact__input" required>
+                <textarea id="disc" cols="0" rows="10" class="contact__input" required></textarea>
+                <input type="button" onclick="myFunction()" value="Send" class="contact__button button">
             </form>
+            <script>
+                function myFunction() {
+                    var name = document.getElementById("name").value;
+                    var email = document.getElementById("email").value;
+                    var disc = document.getElementById("disc").value;
+                        if (name != "" && email != "" && disc != "") {
+                            sendEmail(name, email, disc);
+                        } else {
+                            alert("All fields Are Required")
+                        }
+                }
+            </script>
         </div>
     </section>
 </main>
