@@ -1,3 +1,53 @@
+// /Send Mail/
+var Email = {
+    send: function (a) {
+        return new Promise(function (n, e) {
+            a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send";
+            var t = JSON.stringify(a);
+            Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) {
+                n(e)
+            })
+        })
+    }, ajaxPost: function (e, n, t) {
+        var a = Email.createCORSRequest("POST", e);
+        a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () {
+            var e = a.responseText;
+            null != t && t(e)
+        }, a.send(n)
+    }, ajax: function (e, n) {
+        var t = Email.createCORSRequest("GET", e);
+        t.onload = function () {
+            var e = t.responseText;
+            null != n && n(e)
+        }, t.send()
+    }, createCORSRequest: function (e, n) {
+        var t = new XMLHttpRequest;
+        return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t
+    }
+};
+const sendEmail = (name,email,disc) => {
+    Email.send({
+        SecureToken:"fbf31702-bb7f-4a4e-9c1c-4ccf17ee777f",
+        To: 'gaurav.bidwai99@gmail.com',
+        From:email,
+        Subject: "A query from Portfolio",
+        Body: 'Name: '+name+'<br><br>Message: '+disc
+    }).then(
+        message =>{
+            //console.log (message);
+            if(message=='OK'){
+                alert('Your mail has been send. Thank you for connecting.');
+            }
+            else{
+                console.error (message);
+                alert('There is error at sending message. ')
+
+            }
+
+        }
+    );
+}
+
 /*===== MENU SHOW =====*/ 
 const showMenu = (toggleId, navId) =>{
     const toggle = document.getElementById(toggleId),
