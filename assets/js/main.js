@@ -36,6 +36,7 @@ const sendEmail = (name,email,disc) => {
         message =>{
             //console.log (message);
             if(message=='OK'){
+                document.getElementById("myForm").reset();
                 alert('Your mail has been send. Thank you for connecting.');
             }
             else{
